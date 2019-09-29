@@ -74,10 +74,15 @@ fi
 AM_CONDITIONAL(HAVE_TEXTLCD, test x"$withtextlcd" != xno)
 
 AC_ARG_WITH(7segment,
-	AC_HELP_STRING([--with-7segment], [use 7 segment lcd, yes or no]),
-	[[TEXTSKIN="7segment"]],
-	[[TEXTSKIN="default"]]
+	AC_HELP_STRING([--with-7segment], [use ascii based lcd, yes or no]),
+	[[with7segment=$withval]],
+	[[with7segment=no]]
 )
+if test x"$with7segment" != xno ; then
+	AC_DEFINE(HAVE_7SEGMENT, 1,[Define when using an ascii based lcd device])
+fi
+AM_CONDITIONAL(HAVE_7SEGMENT, test x"$with7segment" != xno)
+
 AC_SUBST(TEXTSKIN)
 
 if test `echo "$BOXTYPE" | cut -b 1-7` == "mbmicro"; then
@@ -254,6 +259,7 @@ data/fonts/Makefile
 data/countries/Makefile
 data/extensions/Makefile
 data/keymaps/Makefile
+data/7segment/Makefile
 data/hw_info/Makefile
 data/rc_models/Makefile
 data/skin_default/Makefile
