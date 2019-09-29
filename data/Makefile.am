@@ -24,6 +24,10 @@ dist_pkgdata_DATA = \
 	otv_06180000_1000_0011.dict \
 	otv_06400000_00a9_0003.dict
 
+if HAVE_7SEGMENT
+SUBDIRS += 7segment
+endif
+
 if HAVE_TEXTLCD
 dist_pkgdata_DATA += skin_text.xml
 else
